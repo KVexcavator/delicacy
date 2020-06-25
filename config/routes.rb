@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   root 'pages#index'
 
   namespace :api do
-    namespace :vl do
+    namespace :v1 do
       resources :dishes, param: :slug
       resources :rewiews, only: [:create, :destroy]
     end
