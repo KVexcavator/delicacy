@@ -16,3 +16,10 @@ create the rails application
 rails new .  параметры: --webpacker=react --database=postgresql
 -T
 rails server
+
+* Postgresql 
+
+* yarn add
+react-router-dom
+axios
+styled-components
