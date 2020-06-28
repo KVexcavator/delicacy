@@ -1,7 +1,35 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
+import axios from 'axios'
+import Header from './Header'
 
-const Dish = () => {
-  return <div>This is Dishes#show view for our app.</div>
+const Dish = (props) => {
+  const [dish, setDish] = useState({})
+  const [rewiew, setRewiew] = useState({})
+  const [loaded, setLoaded] = useState(false)
+
+  useEffect( () => {
+   // console.log(props)
+    const slug = props.match.params.slug
+    const url = `/api/v1/dishes/${slug}`
+
+    axios.get(url)
+    .then(resp => setDish(resp.data.data.attributes))
+    .catch(resp => console.log(resp))
+  }, [])
+
+  return (
+    <div className="wrapper">
+      <div className="column">
+        <Header 
+          attributes = {dish}          
+        />
+        <div className="rewiews"></div>
+      </div>
+      <div className="column">
+        <div className="rewiew-form">[Rewiew Form Goes Here]</div>
+      </div>
+    </div>
+  )
 }
 
 export default Dish

@@ -8,7 +8,7 @@ dishes = Dish.create([
     image_url: "https://png.pngtree.com/png-clipart/20200224/original/pngtree-burger-vector-illustration-with-simple-black-line-design-burger-icon-fast-png-image_5225332.jpg"
   },
   {
-    name: "smoked fish",
+    name: "Smoked fish",
     image_url: "https://png.pngtree.com/png-clipart/20190925/original/pngtree-grilled-fish-in-a-dish-mapped-photograph-png-and-eps-png-image_4961795.jpg"
   }
 ])
