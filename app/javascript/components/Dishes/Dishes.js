@@ -32,12 +32,8 @@ const Dishes = () => {
   const [dishes, setDishes] = useState([])
 
   useEffect(() => {
-    // Get all of our dishes from api
-    // Update dishes in our state
     axios.get('/api/v1/dishes.json')
-      .then( resp => {
-        setDishes(resp.data.data )
-      } )
+    .then( resp => { setDishes(resp.data.data )})
     .catch( resp => console.log(resp) )
   }, [dishes.length])
 
