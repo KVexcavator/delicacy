@@ -4,7 +4,7 @@ module Api
       protect_from_forgery with: :null_session
 
       def create
-        rewiew = Rewiew.new(rewiew_params)
+        rewiew = dish.rewiews.new(rewiew_params)
         if rewiew.save
           render json: RewiewSerializer.new(rewiew).serialized_json
         else
@@ -22,6 +22,10 @@ module Api
       end
 
       private
+
+      def dish
+        @dish ||=Dish.find(params[:dish_id])
+      end
 
       def rewiew_params
         params.require(:rewiew).permit(:title, :description, :score, :dish_id)

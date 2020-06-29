@@ -41,6 +41,30 @@ const Dish = (props) => {
     .catch(resp => console.log(resp))
   }, [])
 
+  const handleChange = (event) => {
+    event.preventDefault()
+
+    setRewiew(Object.assign({}, rewiew, {[event.target.name]: event.target.value}))
+
+    console.log('rewiew:', rewiew)
+  }
+
+  const handleSubmit = (event) => {
+    event.preventDefault()
+
+    const csrfToken = document.querySelector('[name=csrf-token]').content
+    axios.defaults.headers.common['X-CSRF-TOKEN'] = csrfToken
+
+    const dish_id = dish.data.id
+    axios.post('/api/v1/rewiews', {rewiew, dish_id})
+      .then( resp => {
+        const included = [...dish.included, resp.data]
+        setDish({...dish, included})
+        setRewiew({title: '', description: '', score: 0})
+      } )
+    .catch( resp => {} )
+  }
+
   return (
     <Wrapper>
       { 
@@ -56,7 +80,12 @@ const Dish = (props) => {
             <div className="rewiews"></div>
           </Column>
           <Column>
-            <RewiewForm />
+            <RewiewForm 
+              handleChange = {handleChange}
+              handleSubmit = {handleSubmit}
+              attributes = {dish.data}
+              rewiew = {rewiew}
+            />
           </Column>
         </Fragment>
       }
