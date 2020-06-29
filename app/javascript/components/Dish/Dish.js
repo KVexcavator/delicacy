@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, Fragment } from 'react'
 import axios from 'axios'
 import Header from './Header'
+import RewiewForm from './RewiewForm'
 import styled from 'styled-components'
 
 const Wrapper = styled.div`
@@ -42,21 +43,23 @@ const Dish = (props) => {
 
   return (
     <Wrapper>
-      <Column>
-        <Main>
-          { 
-            loaded &&
-            <Header 
-              attributes = {dish.data}          
-              rewiews = {dish.included}
-            />
-          }
-        </Main>
-        <div className="rewiews"></div>
-      </Column>
-      <Column>
-        <div className="rewiew-form">[Rewiew Form Goes Here]</div>
-      </Column>
+      { 
+        loaded &&
+        <Fragment>
+          <Column>
+            <Main>
+              <Header 
+                attributes = {dish.data}          
+                rewiews = {dish.included}
+              />
+            </Main>
+            <div className="rewiews"></div>
+          </Column>
+          <Column>
+            <RewiewForm />
+          </Column>
+        </Fragment>
+      }
     </Wrapper>
   )
 }
