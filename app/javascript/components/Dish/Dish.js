@@ -13,16 +13,23 @@ const Dish = (props) => {
     const url = `/api/v1/dishes/${slug}`
 
     axios.get(url)
-    .then(resp => setDish(resp.data.data.attributes))
+    .then(resp => {
+      setDish(resp.data)
+      setLoaded(true)
+    })
     .catch(resp => console.log(resp))
   }, [])
 
   return (
     <div className="wrapper">
       <div className="column">
-        <Header 
-          attributes = {dish}          
-        />
+        { 
+          loaded &&
+          <Header 
+            attributes = {dish.data}          
+            rewiews = {dish.included}
+          />
+        }
         <div className="rewiews"></div>
       </div>
       <div className="column">
