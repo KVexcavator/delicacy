@@ -1,6 +1,26 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import Header from './Header'
+import styled from 'styled-components'
+
+const Wrapper = styled.div`
+  margin-left: auto;
+  margin-right: auto;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+`
+const Column = styled.div`
+  background: #fff;
+  height: 100ch;
+  overflow: scroll;
+
+  &: last-child {
+    background:#000;
+  }
+`
+const Main = styled.div`
+  padding-left: 50px;
+`
 
 const Dish = (props) => {
   const [dish, setDish] = useState({})
@@ -21,21 +41,23 @@ const Dish = (props) => {
   }, [])
 
   return (
-    <div className="wrapper">
-      <div className="column">
-        { 
-          loaded &&
-          <Header 
-            attributes = {dish.data}          
-            rewiews = {dish.included}
-          />
-        }
+    <Wrapper>
+      <Column>
+        <Main>
+          { 
+            loaded &&
+            <Header 
+              attributes = {dish.data}          
+              rewiews = {dish.included}
+            />
+          }
+        </Main>
         <div className="rewiews"></div>
-      </div>
-      <div className="column">
+      </Column>
+      <Column>
         <div className="rewiew-form">[Rewiew Form Goes Here]</div>
-      </div>
-    </div>
+      </Column>
+    </Wrapper>
   )
 }
 
