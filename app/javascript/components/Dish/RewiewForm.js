@@ -18,6 +18,7 @@ const RatingBox = styled.div`
   justify-content: center;
   flex-direction: row-reverse;
   position: relative;
+  margin-top: 12px;
 
   input {
     display: none;
@@ -43,7 +44,64 @@ const RatingBox = styled.div`
     background-image: url("data:image/svg+xml;charset=UTF-8,${Hover}");
   }
 `
-const RatingTitle = styled.div``
+const Field = styled.div`
+  border-radius: 4px;
+
+  input {
+    min-height: 50px;
+    border-radius: 4px;
+    border: 1px solid #e6e6e6;
+    margin: 0 0 12px 0;
+    padding: 12px;
+    width: 96%;
+  }
+
+  textarea {
+    width: 100%;
+    min-height: 80px;
+    border-radius: 4px;
+    border: 1px solid #e6e6e6;
+    margin: 12px;
+    padding: 12px;
+  }
+`
+const Wrapper = styled.div`
+  background: #fff;
+  padding: 20px;
+  background: #000;
+  height: 100vn;
+  padding-top: 100px:
+`
+const SubmitBtn = styled.button`
+  color: #fff;
+  background: #333;
+  border-radius: 4px;
+  padding: 12px;
+  font-size: 18px;
+  cursor: pointer;
+  transition: ease-in-out 0.1s;
+  border: 1px solid #fff;
+  width: 100%;
+  margin-top: 20px;
+
+  &:hover {
+    background: #fff;
+    color: #000;
+    border:1px solid #fff;
+  }
+`
+const HeadLine = styled.div`
+  padding: 30px;
+  font-size: 20px;
+  font-weight: bold;
+  color: #fff;
+`
+const RatingTitle = styled.div`
+  font-size: 20px;
+  padding-bottom: 20px;
+  font-weight: bold;
+`
+
 
 const RewiewForm  = (props) => {
 //  console.log(props)
@@ -53,21 +111,22 @@ const RewiewForm  = (props) => {
         <input
           type="radio"
           value={score}
+          checked={props.rewiew.score == score}
           name="rating"
           onChange={() => console.log('selected:', score)}
           id={`rating-${score}`}
         />
-        <label></label>
+        <label onClick={props.setRating.bind(this, score)}></label>
       </Fragment>
     )
   })
 
 
   return (
-    <div className="wrapper">
+    <Wrapper>
       <form onSubmit={props.handleSubmit}>
-        <div>Have an experience with {props.attributes.attributes.name}? Share your review!</div>
-        <div className="field">
+        <HeadLine>Have an experience with {props.attributes.attributes.name}? Share your review!</HeadLine>
+        <Field>
           <input 
             onChange={props.handleChange} 
             value={props.rewiew.title} 
@@ -75,8 +134,8 @@ const RewiewForm  = (props) => {
             name="title" 
             placeholder="Review Title" 
           />
-        </div>
-        <div className="field">
+        </Field>
+        <Field>
           <input 
             onChange={props.handleChange} 
             value={props.rewiew.description}
@@ -84,18 +143,18 @@ const RewiewForm  = (props) => {
             name="description" 
             placeholder="Review Fescription" 
           />
-        </div>
-        <div className="field">
+        </Field>
+        <Field>
           <RatingContainer>
-            <div className="rating-title-text">Rate This Dish</div>
+            <RatingTitle>Rate This Dish</RatingTitle>
             <RatingBox>
               {ratingOptions}
             </RatingBox>
           </RatingContainer>
-        </div>
-        <button type="submit">Submit Your Review</button>
+        </Field>
+        <SubmitBtn>Submit Your Review</SubmitBtn>
       </form>
-    </div>
+    </Wrapper>
   )
 }
 

@@ -65,6 +65,12 @@ const Dish = (props) => {
     .catch( resp => {} )
   }
 
+  const setRating = (score, event) => {
+    event.preventDefault()
+
+    setRewiew({...rewiew, score})
+  }
+
   return (
     <Wrapper>
       { 
@@ -81,6 +87,7 @@ const Dish = (props) => {
           </Column>
           <Column>
             <RewiewForm 
+              setRating = {setRating}
               handleChange = {handleChange}
               handleSubmit = {handleSubmit}
               attributes = {dish.data}
